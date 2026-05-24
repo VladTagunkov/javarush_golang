@@ -4,10 +4,15 @@ import "fmt"
 
 // Демонстрация: recover() полезен только внутри deferred-функции во время раскрутки паники.
 func boom() {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("recovered: boom")
+		}
+	}()
+	panic("boom")
 	// TODO: Добавьте defer func(){ ... }, внутри которого вызывается recover() и обрабатывается паника.
 	// TODO: Внутри deferred-функции выведите в stdout строку строго формата: recovered: boom
 	// TODO: После установки defer вызовите panic("boom"), чтобы запустить раскрутку паники.
-
 }
 
 func main() {
