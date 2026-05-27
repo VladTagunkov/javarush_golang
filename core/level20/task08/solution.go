@@ -12,6 +12,10 @@ func normalizeTitle(raw string) string {
 	// 3) затем strings.Fields,
 	// 4) затем strings.Join с одиночными пробелами.
 	// Важно: если после нормализации заголовок пустой — main должен вывести ошибку.
+	raw = strings.ReplaceAll(raw, "_", " ")
+	parts := strings.Fields(strings.TrimSpace(raw))
+	raw = strings.Join(parts, " ")
+
 	return raw
 }
 
@@ -37,17 +41,23 @@ func main() {
 	//
 	// Подсказка по каркасу: используйте fmt.Fprintf(&b, ...) и b.WriteString(...).
 	if doneFlag == 1 {
-		b.WriteString(fmt.Fprintf(&b, "%d) ", taskNumber))
+		fmt.Fprintf(&b, "%d) ", taskNumber)
+		b.WriteString("[x] ")
+		b.WriteString(title)
 	} else {
-		b.WriteString(fmt.Fprintf("%d)  [ ] <%s>"), taskNumber, title)
+		fmt.Fprintf(&b, "%d) ", taskNumber)
+		b.WriteString("[ ] ")
+		b.WriteString(title)
 	}
 
-	fmt.Fprintf(&b, "%d) ", taskNumber)
-	b.WriteString("[ ] ")
-	b.WriteString(title)
+	//fmt.Fprintf(&b, "%d) ", taskNumber)
+	//b.WriteString("[ ] ")
+	//b.WriteString(title)
 
 	fmt.Println(b.String())
 
 	// TODO: Выведите второй строкой отладочное представление заголовка в формате:
-	// titleDebug="<...>" используя fmt.Printf и плейсхолдер %q для title.
+	titleDebug := title //используя fmt.Printf и плейсхолдер %q для title.
+	fmt.Printf("titleDebug=%q\n", titleDebug)
+
 }
