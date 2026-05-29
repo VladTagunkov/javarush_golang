@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 )
 
 func finalPrice(price int, discount *int) int {
@@ -12,8 +13,12 @@ func finalPrice(price int, discount *int) int {
 
 	// TODO: Реализуйте расчёт итоговой цены со скидкой и защиту от отрицательного результата (итог не должен быть меньше 0).
 	// TODO: Разыменовывайте discount (*discount) только после проверки discount на nil.
+	final_res := price - *discount
+	if final_res < 0 {
+		return 0
+	}
 
-	return price
+	return final_res
 }
 
 func main() {
@@ -27,6 +32,7 @@ func main() {
 
 		// TODO: Распарсьте discountText в int через strconv.Atoi и используйте полученное значение как скидку.
 		// TODO: Передайте в finalPrice указатель на распарсенное значение.
+		d, _ = strconv.Atoi(discountText)
 
 		discount = &d
 	}
