@@ -10,7 +10,7 @@ type User struct {
 // FullName возвращает имя и фамилию в "человеческом" виде: через один пробел.
 func (u User) FullName() string {
 	// TODO: Реализуйте форматирование полного имени в виде "<FirstName> <LastName>" с ровно одним пробелом.
-	return ""
+	return u.FirstName + " " + u.LastName
 }
 
 func main() {
